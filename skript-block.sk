@@ -7,46 +7,46 @@ command /skblock <player> <action:text> <state:boolean>:
     trigger:
         if {_action} = "move":
             if {_state} = true:
-                if {movement::%{@p}%} is not set:
-                    set {movement::%{@p}%} to true
-                    send "&aPlayer %{@p}% blocked."
+                if {movement::%{_player}%} is not set:
+                    set {movement::%{_player}%} to true
+                    send "&aPlayer %{_player}% blocked."
                 else:
                     send "&cIncorrect, this player is already blocked."
             if {_state} = false:
-                if {movement::%{@p}%} is set:
-                    set {movement::%{@p}%} to false
-                    send "&aPlayer %{@p}% unblocked."
-                    delete {movement::%{@p}%}
+                if {movement::%{_player}%} is set:
+                    set {movement::%{_player}%} to false
+                    send "&aPlayer %{_player}% unblocked."
+                    delete {movement::%{_player}%}
                 else:
                     send "&cIncorrect, this player is not blocked."
         
         if {_action} = "chat":
             if {_state} = true:
-                if {chating::%{@p}%} is not set:
-                    set {chating::%{@p}%} to true
-                    send "&aPlayer %{@p}% blocked."
+                if {chating::%{_player}%} is not set:
+                    set {chating::%{_player}%} to true
+                    send "&aPlayer %{_player}% blocked."
                 else:
                     send "&cIncorrect, this player is already blocked."
             if {_state} = false:
-                if {chating::%{@p}%} is set:
-                    set {chating::%{@p}%} to false
-                    send "&aPlayer %{@p}% unblocked."
-                    delete {chating::%{@p}%}
+                if {chating::%{_player}%} is set:
+                    set {chating::%{_player}%} to false
+                    send "&aPlayer %{_player}% unblocked."
+                    delete {chating::%{_player}%}
                 else:
                     send "&cIncorrect, this player is not blocked."
 
         if {_action} = "click":
             if {_state} = true:
-                if {clicking::%{@p}%} is not set:
-                    set {clicking::%{@p}%} to true
-                    send "&aPlayer %{@p}% blocked."
+                if {clicking::%{_player}%} is not set:
+                    set {clicking::%{_player}%} to true
+                    send "&aPlayer %{_player}% blocked."
                 else:
                     send "&cIncorrect, this player is already blocked."
             if {_state} = false:
-                if {clicking::%{@p}%} is set:
-                    set {clicking::%{@p}%} to false
-                    send "&aPlayer %{@p}% unblocked."
-                    delete {clicking::%{@p}%}
+                if {clicking::%{_player}%} is set:
+                    set {clicking::%{_player}%} to false
+                    send "&aPlayer %{_player}% unblocked."
+                    delete {clicking::%{_player}%}
                 else:
                     send "&cIncorrect, this player is not blocked."
 
@@ -56,21 +56,21 @@ on tab complete of "/skblock":
     set tab completions for position 3 to "true" and "false"
 
 on player move:
-    if {movement::%{@p}%} is true:
+    if {movement::%player%} = true:
         cancel the event
 
 on block break:
-    if {movement::%{@p}%} is true:
+    if {movement::%player%} = true:
         cancel the event
 
 on block place:
-    if {movement::%{@p}%} is true:
+    if {movement::%player%} = true:
         cancel the event
 
 on chat:
-    if {chating::%{@p}%} is true:
+    if {chatting::%player%} = true:
         cancel the event
 
 on click:
-    if {clicking::%{@p}%} is true:
+    if {clicking::%player%} = true:
         cancel the event
