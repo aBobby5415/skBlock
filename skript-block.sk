@@ -22,16 +22,16 @@ command /skblock <player> <action:text> <state:boolean>:
         
         if {_action} = "chat":
             if {_state} = true:
-                if {chating::%{_player}%} is not set:
-                    set {chating::%{_player}%} to true
+                if {chatting::%{_player}%} is not set:
+                    set {chatting::%{_player}%} to true
                     send "&aPlayer %{_player}% blocked."
                 else:
                     send "&cIncorrect, this player is already blocked."
             if {_state} = false:
-                if {chating::%{_player}%} is set:
-                    set {chating::%{_player}%} to false
+                if {chatting::%{_player}%} is set:
+                    set {chatting::%{_player}%} to false
                     send "&aPlayer %{_player}% unblocked."
-                    delete {chating::%{_player}%}
+                    delete {chatting::%{_player}%}
                 else:
                     send "&cIncorrect, this player is not blocked."
 
