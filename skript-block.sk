@@ -2,7 +2,7 @@
 # 📝 Writed by aBobby_
 # 🍵 Skblock - a simple good script that allows you to prohibit the player from performing actions
 
-command /skblock <player> <action:text> <state:boolean>:
+command /skblock <player:player> <action:text> <state:boolean>:
     permission: source.skblock
     trigger:
         if {_action} = "move":
