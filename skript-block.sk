@@ -1,0 +1,76 @@
+
+# 📝 Writed by aBobby_
+# 🍵 Skblock - a simple good script that allows you to prohibit the player from performing actions
+
+command /skblock <player> <action:text> <state:boolean>:
+    permission: source.skblock
+    trigger:
+        if {_action} = "move":
+            if {_state} = true:
+                if {movement::%{@p}%} is not set:
+                    set {movement::%{@p}%} to true
+                    send "&aPlayer %{@p}% blocked."
+                else:
+                    send "&cIncorrect, this player is already blocked."
+            if {_state} = false:
+                if {movement::%{@p}%} is set:
+                    set {movement::%{@p}%} to false
+                    send "&aPlayer %{@p}% unblocked."
+                    delete {movement::%{@p}%}
+                else:
+                    send "&cIncorrect, this player is not blocked."
+        
+        if {_action} = "chat":
+            if {_state} = true:
+                if {chating::%{@p}%} is not set:
+                    set {chating::%{@p}%} to true
+                    send "&aPlayer %{@p}% blocked."
+                else:
+                    send "&cIncorrect, this player is already blocked."
+            if {_state} = false:
+                if {chating::%{@p}%} is set:
+                    set {chating::%{@p}%} to false
+                    send "&aPlayer %{@p}% unblocked."
+                    delete {chating::%{@p}%}
+                else:
+                    send "&cIncorrect, this player is not blocked."
+
+        if {_action} = "click":
+            if {_state} = true:
+                if {clicking::%{@p}%} is not set:
+                    set {clicking::%{@p}%} to true
+                    send "&aPlayer %{@p}% blocked."
+                else:
+                    send "&cIncorrect, this player is already blocked."
+            if {_state} = false:
+                if {clicking::%{@p}%} is set:
+                    set {clicking::%{@p}%} to false
+                    send "&aPlayer %{@p}% unblocked."
+                    delete {clicking::%{@p}%}
+                else:
+                    send "&cIncorrect, this player is not blocked."
+
+on tab complete of "/skblock":
+    set tab completions for position 1 to all players
+    set tab completions for position 2 to "move", "chat" and "click"
+    set tab completions for position 3 to "true" and "false"
+
+on player move:
+    if {movement::%{@p}%} is true:
+        cancel the event
+
+on block break:
+    if {movement::%{@p}%} is true:
+        cancel the event
+
+on block place:
+    if {movement::%{@p}%} is true:
+        cancel the event
+
+on chat:
+    if {chating::%{@p}%} is true:
+        cancel the event
+
+on click:
+    if {clicking::%{@p}%} is true:
+        cancel the event
